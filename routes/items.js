@@ -1,4 +1,4 @@
-const items = require('../Items')
+const {getItem, getItems} = require('../controllers/itemController')
 
 // Items Schema 
 const Item = {
@@ -18,7 +18,8 @@ const getItemsOpts = {
                 items: Item
             }
         }
-    }
+    },
+    handler: getItems,
 }
 
 // schema for single item
@@ -27,27 +28,17 @@ const getItemOpts = {
         response: {
             200: Item
         }
-    }
+    },
+    handler: getItem,
 }
 
 function itemRoutes(fastify, options, done) {
 
     // Get all items
-    fastify.get('/items', getItemsOpts, (req, reply) => {
-        reply.send(items) 
-    })
+    fastify.get('/items', getItemsOpts)
 
     // Get single item
-    fastify.get('/items/:id', getItemOpts, (req, reply) => {
-        const { id } = req.params;
-        const item = items.find(item => item.id === id);
-
-        if (item) {
-            reply.send(item); 
-        } else {
-            reply.code(404).send({ message: 'Item not found' }); 
-        }
-    })
+    fastify.get('/items/:id', getItemOpts)
      
     done()
 }
