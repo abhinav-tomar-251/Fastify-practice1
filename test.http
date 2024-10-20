@@ -4,3 +4,23 @@ GET http://localhost:3000/items HTTP/1.1
 
 ### Get Single Items
 GET http://localhost:3000/items/2 HTTP/1.1
+
+### Add Items
+POST http://localhost:3000/items HTTP/1.1
+Content-Type: application/json
+
+{
+   
+}
+
+### Delete Items
+DELETE  http://localhost:3000/items/6 HTTP/1.1
+
+
+### Update Items
+PUT  http://localhost:3000/items/5 HTTP/1.1
+Content-Type: application/json
+
+{
+   "name": "Update Laptop 5"
+}
